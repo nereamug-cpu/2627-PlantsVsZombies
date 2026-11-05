@@ -1,10 +1,8 @@
 package pvz.logic;
 import java.util.Random;
+import pvz.utils.*;
 import pvz.logic.gameobjects.*;
-
-import pvz.control.*;
-import pvz.logic.gameobjects.PeashooterList;
-import pvz.logic.gameobjects.SunflowerList;
+import pvz.control.Level;
 
 public class Game implements GameStatus, GameWorld, GameModel {
 	public static final int INITIAL_COINS = 50;
@@ -39,6 +37,11 @@ public class Game implements GameStatus, GameWorld, GameModel {
 	//...
 	@Override
 	public GameItem getGameItemInPosition (Position position) {
-		return container.getGameIconInPosition(position);
+		return container.getGameItemInPosition(position);
+	}
+	
+	@Override
+	public int getCycles() {
+		return numCycle;
 	}
 }

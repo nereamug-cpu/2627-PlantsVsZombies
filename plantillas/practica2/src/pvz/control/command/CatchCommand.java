@@ -1,7 +1,9 @@
 package pvz.control.command;
 import java.util.Scanner;
 
-import pvz.view.Messages;
+
+import pvz.logic.*;
+import pvz.view.*;
 
 public class CatchCommand extends Command{
 	private int col;

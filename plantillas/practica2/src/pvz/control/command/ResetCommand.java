@@ -1,8 +1,10 @@
 package pvz.control.command;
 import java.util.Scanner;
 
+
 import pvz.control.Level;
-import pvz.view.Messages;
+import pvz.logic.*;
+import pvz.view.*;
 
 public class ResetCommand extends Command{
 	private Level level;

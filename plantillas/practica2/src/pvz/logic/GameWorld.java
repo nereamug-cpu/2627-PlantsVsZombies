@@ -14,12 +14,12 @@ public interface GameWorld {
 	void attackZombie(Position p, int damage);
 	void attackPlant(Position p, int damage);
 	
-	static Position newZombiePosition(int row);
+	Position newZombiePosition(int row);
 	
 	boolean checkGameObject(String plantType);
 	String positionToString(Position p);
 	
 	void generateCoins(int amount);
 	//...
-	GameItem getGameIconInPosition(Position position);
+	GameItem getGameItemInPosition(Position position);
 }

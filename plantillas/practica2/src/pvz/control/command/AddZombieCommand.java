@@ -1,7 +1,8 @@
 package pvz.control.command;
 import java.util.Scanner;
 
-import pvz.view.Messages;
+import pvz.logic.*;
+import pvz.view.*;
 
 public class AddZombieCommand extends Command {
 	private String zombieName;

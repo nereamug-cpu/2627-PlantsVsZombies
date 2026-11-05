@@ -1,5 +1,6 @@
 package pvz.control.command;
-import pvz.view.Messages;
+import pvz.logic.*;
+import pvz.view.*;
 
 public class HelpCommand extends Command {
 	public HelpCommand() {
