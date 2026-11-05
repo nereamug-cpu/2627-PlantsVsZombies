@@ -1,6 +1,7 @@
 package pvz.logic;
 
 import pvz.utils.Position;
+import pvz.logic.gameobjects.GameItem;
 
 public interface GameWorld {
 	public static final int NUM_ROWS = 4;
@@ -18,5 +19,7 @@ public interface GameWorld {
 	boolean checkGameObject(String plantType);
 	String positionToString(Position p);
 	
+	void generateCoins(int amount);
 	//...
+	GameItem getGameIconInPosition(Position position);
 }

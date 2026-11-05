@@ -1,5 +1,6 @@
 package pvz.logic;
 import java.util.Random;
+import pvz.logic.gameobjects.*;
 
 import pvz.control.*;
 import pvz.logic.gameobjects.PeashooterList;
@@ -13,6 +14,8 @@ public class Game implements GameStatus, GameWorld, GameModel {
 	private final long seed;
 	private int numCycle;
 	private int suncoins;
+	
+	private GameObjectContainer container;
 	
 	
 	public Game(long seed, Level level) {
@@ -34,4 +37,8 @@ public class Game implements GameStatus, GameWorld, GameModel {
 	}
 	
 	//...
+	@Override
+	public GameItem getGameItemInPosition (Position position) {
+		return container.getGameIconInPosition(position);
+	}
 }

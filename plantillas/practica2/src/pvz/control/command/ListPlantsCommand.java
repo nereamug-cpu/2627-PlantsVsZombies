@@ -22,4 +22,6 @@ public class ListPlantsCommand extends Command{
 	public void execute(GameModel gm, GameView gv) {
 		//...
 	}
+	
+	
 }
