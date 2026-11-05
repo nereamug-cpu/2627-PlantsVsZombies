@@ -1,6 +1,7 @@
-package pvz.control;
-import pvz.view.Messages;
+package pvz.control.command;
 import java.util.Scanner;
+
+import pvz.view.Messages;
 
 public class AddZombieCommand extends Command {
 	private String zombieName;
@@ -15,6 +16,8 @@ public class AddZombieCommand extends Command {
 	}
 	
 	private AddZombieCommand(String zN, int c, int r) {
+		// llamamos primero a la constructora sin parámetros para inicializar los atributos de Command
+		this();
 		this.zombieName = zN;
 		this.col = c;
 		this.row = r;
@@ -39,6 +42,7 @@ public class AddZombieCommand extends Command {
 			return null;
 		}
 		
+		// creamos variables de tipo int que almacenan los valores de columna y fila leídos en String[] c
 		int new_col = colScanner.nextInt();
 		int new_row = rowScanner.nextInt();
 		
@@ -50,6 +54,6 @@ public class AddZombieCommand extends Command {
 	
 	@Override
 	public void execute(GameModel gm, GameView gv) {
-		
+		//...
 	}
 }

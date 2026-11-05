@@ -1,6 +1,6 @@
-package tp1.pvz.view;
+package pvz.view;
 
-import tp1.pvz.control.Level;
+import pvz.control.Level;
 
 /**
  * Central repository of all user-facing string literals and format templates.

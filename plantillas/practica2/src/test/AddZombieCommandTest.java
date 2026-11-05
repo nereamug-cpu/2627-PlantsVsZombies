@@ -1,10 +1,11 @@
 package test;
 
 import org.junit.jupiter.api.Tag;
+
 import org.junit.jupiter.api.Test;
 import pvz.logic.Game;
-import test.RecordingView;
 import pvz.view.Messages;
+import test.RecordingView;
 
 import java.util.List;
 

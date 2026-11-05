@@ -12,8 +12,8 @@ import pvz.logic.gameobjects.Peashooter;
 import pvz.logic.gameobjects.Sun;
 import pvz.logic.gameobjects.Sunflower;
 import pvz.logic.gameobjects.WallNut;
-import utils.Position;
 import pvz.view.Messages;
+import utils.Position;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

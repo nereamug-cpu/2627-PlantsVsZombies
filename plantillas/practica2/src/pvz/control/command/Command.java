@@ -1,6 +1,8 @@
-package pvz.control;
+package pvz.control.command;
 import java.util.List;
+
 import java.util.Arrays;
+import pvz.logic.GameModel;
 
 public abstract class Command {
 
