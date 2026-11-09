@@ -1,4 +1,4 @@
-package pvz.control.command;
+package pvz.control.commands;
 import pvz.logic.*;
 import pvz.view.*;
 
