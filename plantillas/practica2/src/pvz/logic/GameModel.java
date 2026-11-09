@@ -1,6 +1,6 @@
 package pvz.logic;
 //GameModel ahora tiene solo los métodos relacionados con los COMANDOS
-import utils.Position;
+import pvz.utils.Position;
 
 public interface GameModel {
 	void reset();//reinicia la partida con la misma semilla
