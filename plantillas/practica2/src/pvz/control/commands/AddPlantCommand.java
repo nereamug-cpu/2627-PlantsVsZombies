@@ -40,9 +40,9 @@ public class AddPlantCommand extends Command{//extends por la herencia de la sup
 	public Command create(String[] c) {
 		// Si no tiene cuatro elementos la cadena de caracteres entonces no es AddPlantCommand
 		if (c.length != 4) {  
-			AddPlantCommand cmdError = new AddPlantCommand(); // Marca la bandera de error a true para recordarlo durante la ejecucion 
-			cmdError.errorParams = true; // Devuelve la instancia con el fallo marcado 
-			return cmdError; 
+			AddPlantCommand cmdError = new AddPlantCommand();//crea nuevo objeto del comando AddPlantCommand y llama a la constructora sin parámetros
+			cmdError.errorParams = true; //para que execute no ponga planta, sino que imprima el mensaje de error
+			return cmdError; //lo devuelve a parse
 		}
 		//try-catch para convertir texto de col, row a enteros
 		//en try código que puede fallar, en catch(tipo de error) solución al error
@@ -51,7 +51,7 @@ public class AddPlantCommand extends Command{//extends por la herencia de la sup
 			int col = Integer.parseInt(c[2]);
 			int row = Integer.parseInt(c[3]);
 			return new AddPlantCommand(plantName, col, row);
-		} catch (NumberFormatException e){//esto de dónde sale exactamente? SEGUIR POR AQUÍ.
+		} catch (NumberFormatException e){//está en 01_java.pdf de los aputnes
 			AddPlantCommand cmdError = new AddPlantCommand();
 			cmdError.errorParams = true;
 			return cmdError;
@@ -95,6 +95,26 @@ public class AddPlantCommand extends Command{//extends por la herencia de la sup
 	
 	@Override
 	public void execute(GameModel gm, GameView gv) {
-		//...
+		//si los parámetros están mal escritos
+		if (this.errorParams) gv.showError(Messages.COMMAND_PARAMETERS_MISSING);
+		//nombre mal
+		else if (!gm.checkGameObject(this.plantName)) gv.showError(Messages.INVALID_GAME_OBJECT);
+		//casilla mal
+		else {
+			Position pos = new Position(this.row, this.col);//creo Position con col y row del jugador
+			//si casilla no válida u ocupada
+			if (!gm.isInsideBoard(pos) || !gm.isEmpty(pos)) gv.showError(Messages.INVALID_POSITION);
+			//si casilla válida, intenta comprar y poner planta
+			else {
+				int coinsBefore = gm.getCoins();//guaramos soles del jugaor
+				gm.addGameObject(this.plantName, pos);//Model intenta añadir la planta al tablero
+				if (gm.getCoins() == coinsBefore) gv.showError(Messages.NOT_ENOUGH_COINS);//no han bajado las coins, no se ha plantado nada
+				else {//se colocó la planta, jugador tiene menos soles
+					gm.update();//se actualiza nuevo ciclo
+					gv.showGame();
+				}
+			}
+		}
+		
 	}
 }
