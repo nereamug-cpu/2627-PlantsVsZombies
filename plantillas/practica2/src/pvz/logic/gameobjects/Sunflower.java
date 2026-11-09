@@ -31,7 +31,7 @@ public class Sunflower extends Plant{
 	public void update() {
 		if (isAlive()) {
 			if (cycles == PERIOD) {
-				game.generateCoins(COINS_GENERATED);
+				// hay que generar soles pero no añadirlos porque los tiene que recoger el usuario
 				cycles = 0;
 			}
 			cycles++;

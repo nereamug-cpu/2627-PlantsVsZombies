@@ -1,6 +1,9 @@
 package pvz.control.command;
 import pvz.logic.*;
+import pvz.logic.gameobjects.factories.PlantFactory;
 import pvz.view.*;
+import pvz.logic.gameobjects.*;
+import java.util.List;
 
 public class ListPlantsCommand extends Command{
 	public ListPlantsCommand() {
@@ -21,7 +24,10 @@ public class ListPlantsCommand extends Command{
 	
 	@Override
 	public void execute(GameModel gm, GameView gv) {
-		//...
+		List<Plant> plantas = PlantFactory.getAvailablePlants();
+		for (int i = 0; i < plantas.size(); i++) {
+			
+		}
 	}
 	
 	

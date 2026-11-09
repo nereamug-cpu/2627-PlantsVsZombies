@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 import pvz.logic.*;
 import pvz.view.*;
+import pvz.utils.*;
 
 public class AddPlantCommand extends Command{
 	private String plantName;
@@ -59,6 +60,8 @@ public class AddPlantCommand extends Command{
 	
 	@Override
 	public void execute(GameModel gm, GameView gv) {
-		//...
+		Position position = new Position(col, row);
+		gm.addPlant(plantName, position);
+		gv.showGame();
 	}
 }

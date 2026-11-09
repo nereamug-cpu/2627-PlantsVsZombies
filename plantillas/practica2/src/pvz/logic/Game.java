@@ -70,8 +70,10 @@ public class Game implements GameStatus, GameWorld, GameModel {
 	
 	@Override
 	public void addPlant(String plantType, Position position) {
-		Plant plant = PlantFactory.spawnPlant(plantType, this, position);
-		container.add(plant);
+		if (isInsideBoard(position)) {
+			Plant plant = PlantFactory.spawnPlant(plantType, this, position);
+			container.add(plant);
+		}
 	}
 	
 	@Override
