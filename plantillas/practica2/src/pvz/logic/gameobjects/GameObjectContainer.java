@@ -30,4 +30,24 @@ public class GameObjectContainer {
 		
 		return sol;
 	}
+	
+	public boolean isEmpty(Position p) {
+		boolean empty = true;
+		int pos = 0;
+		
+		while (empty && pos < gameObjects.size()) {
+			if (gameObjects.get(pos).getPosition().equals(p)) {
+				empty = false;
+			}
+			else {
+				pos++;
+			}
+		}
+		
+		return empty;
+	}
+	
+	public void add(GameObject object) {
+		gameObjects.addLast(object);
+	}
 }

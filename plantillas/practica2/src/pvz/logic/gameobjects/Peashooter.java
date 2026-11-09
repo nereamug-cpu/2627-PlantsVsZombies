@@ -28,7 +28,23 @@ public class Peashooter extends Plant{
 		if (isAlive()) {
 			// Comprobar si está bien
 			Position p = super.getPosition();
-			game.attackZombie(p, DAMAGE);
+			
+			// game.attackZombie(p, DAMAGE);
 		}
+	}
+	
+	@Override
+	public Plant add(GameWorld g, Position p) {
+		return new Peashooter(g, p);
+	}
+	
+	@Override
+	protected String getNameAndShortcut() {
+		return Messages.PEASHOOTER_NAME_AND_SHORTCUT;
+	}
+	
+	@Override
+	protected String getSymbol() {
+		return Messages.PEASHOOTER_SYMBOL;
 	}
 }

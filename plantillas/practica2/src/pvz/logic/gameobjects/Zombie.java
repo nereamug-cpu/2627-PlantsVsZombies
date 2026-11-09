@@ -8,6 +8,8 @@ public abstract class Zombie extends GameObject{
 	private int endurance;
 	private int speed;
 	
+	private int cycles;
+	
 	Zombie(GameWorld game, Position p, int damage, int endurance, int speed) {
 		super(game, p);
 		this.damage = damage;
@@ -16,6 +18,7 @@ public abstract class Zombie extends GameObject{
 	}
 	
 	protected abstract String getSymbol();
+	protected abstract String getName();
 	
 	@Override
 	public String getIcon() {
@@ -33,13 +36,32 @@ public abstract class Zombie extends GameObject{
 	}
 	
 	@Override
-	public void onEnter() {}
-	
-	@Override
-	public void onExit() {}
-	
-	@Override
 	public boolean receiveZombieAttack(int damage) {
 		return false;
 	}
+	
+	@Override
+	public void update() {
+		if (isAlive()) {
+		  if (cycles == speed) {
+			  cycles = 0;
+			  Position p = position.left();
+			  if (game.isEmpty(p)) {
+				  position = p;
+			  }
+		  }
+
+		  GameItem item = game.getGameItemInPosition(position);
+		  if (item != null) {
+		    item.receiveZombieAttack(this.damage);
+		  }
+		  cycles++;
+		}
+	}
+	
+	public boolean verifyName(String zombieName) {
+		return getName().equalsIgnoreCase(zombieName);
+	}
+	
+	abstract public Zombie add(GameWorld g, Position p);
 }

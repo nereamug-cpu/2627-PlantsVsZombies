@@ -37,4 +37,19 @@ public class Sunflower extends Plant{
 			cycles++;
 		}
 	}
+	
+	@Override
+	public Plant add(GameWorld g, Position p) {
+		return new Sunflower(g, p);
+	}
+	
+	@Override
+	protected String getNameAndShortcut() {
+		return Messages.SUNFLOWER_NAME_AND_SHORTCUT;
+	}
+	
+	@Override
+	protected String getSymbol() {
+		return Messages.SUNFLOWER_SYMBOL;
+	}
 }

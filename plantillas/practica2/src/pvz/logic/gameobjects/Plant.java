@@ -45,4 +45,10 @@ public abstract class Plant extends GameObject{
 		 endurance -= damage;
 		 return true;
 	 }
+	 
+	 public boolean verifyName(String plantName) {
+		 return getNameAndShortcut().equalsIgnoreCase(plantName);
+	 }
+	 
+	 abstract public Plant add(GameWorld g, Position p);
 }

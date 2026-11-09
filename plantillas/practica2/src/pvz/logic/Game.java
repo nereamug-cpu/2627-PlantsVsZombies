@@ -1,7 +1,10 @@
 package pvz.logic;
 import java.util.Random;
 import pvz.utils.*;
+import pvz.view.Messages;
 import pvz.logic.gameobjects.*;
+import pvz.logic.gameobjects.factories.PlantFactory;
+import pvz.logic.gameobjects.factories.ZombieFactory;
 import pvz.control.Level;
 
 public class Game implements GameStatus, GameWorld, GameModel {
@@ -43,5 +46,46 @@ public class Game implements GameStatus, GameWorld, GameModel {
 	@Override
 	public int getCycles() {
 		return numCycle;
+	}
+	
+	@Override
+	public int getCoins() {
+		return suncoins;
+	}
+	
+	@Override
+	public int getRemainingZombies() {
+		return ZombieFactory.getAvailabkeZombies().size();
+	}
+	
+	@Override
+	public boolean isEmpty(Position position) {
+		return container.isEmpty(position);
+	}
+	
+	@Override
+	public boolean isInsideBoard(Position position) {
+		return position.row() >= 0 && position.row() < NUM_ROWS && position.column() >= 0 && position.column() <NUM_COLS;
+	}
+	
+	@Override
+	public void addPlant(String plantType, Position position) {
+		Plant plant = PlantFactory.spawnPlant(plantType, this, position);
+		container.add(plant);
+	}
+	
+	@Override
+	public void generateCoins(int amount) {
+		suncoins += amount;
+	}
+	
+	@Override
+	public String positionToString(Position p) {
+		if (!container.isEmpty(p)) {
+			
+		}
+		else {
+			return Messages.EMPTY_STRING;
+		}
 	}
 }
