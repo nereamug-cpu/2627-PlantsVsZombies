@@ -29,10 +29,23 @@ public class Peashooter extends Plant{
 	
 	@Override
 	public void update() {
-		if (isAlive()) {
-			// Comprobar si está bien
-			Position p = super.getPosition();
-		}
+	    if (isAlive()) {
+	        Position p = getPosition();
+	        boolean attackDone = false;
+	        int col = p.column() + 1;
+
+	        while (!attackDone && col < GameWorld.NUM_COLS) {
+	            Position targetPos = new Position(p.row(), col);
+	            GameItem item = game.getGameItemInPosition(targetPos);
+	            
+	            if (item != null) {
+	                // Al atacar al item, receiveZombieAttack o recibir ataque según la interfaz
+	                attackDone = item.receiveZombieAttack(this.getDamage());
+	            } else {
+	                col++;
+	            }
+	        }
+	    }
 	}
 	
 	@Override

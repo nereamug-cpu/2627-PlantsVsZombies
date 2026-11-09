@@ -38,8 +38,8 @@ public class Game implements GameStatus, GameWorld, GameModel {
 	//TODO. Falta comentar lo que hace cada una auqnue sea obvio para que no nos penalice jeje:
 	
 	@Override
-	public GameItem getGameItemInPosition (Position position) {
-		return container.getGameItemInPosition(position);
+	public GameItem getGameItemInPosition (Position p) {
+		return container.getGameItemInPosition(p);
 	}
 	
 	@Override
@@ -64,12 +64,15 @@ public class Game implements GameStatus, GameWorld, GameModel {
     }
 
     @Override
-    public void addGameObject(String plantType, Position position) {
-        Plant plant = PlantFactory.spawnPlant(plantType, this, position);
+    public boolean addGameObject(String plantType, Position p) {
+    	boolean add = false;
+        Plant plant = PlantFactory.spawnPlant(plantType, this, p);
         if (plant != null && this.suncoins >= plant.getCost()) {
             this.suncoins -= plant.getCost();//descuenta soles
             this.container.add(plant);//añade la planta a container
+            add = true;
         }
+        return add;
     }
 
     @Override
@@ -96,7 +99,9 @@ public class Game implements GameStatus, GameWorld, GameModel {
 
     @Override
     public boolean checkGameObject(String plantType) {
-        return PlantFactory.spawnPlant(plantType, this, new Position(0, 0)) != null; 
+    	boolean check = false;
+    	if (plantType != null) check = PlantFactory.spawnPlant(plantType, this, new Position(0, 0)) != null; 
+        return check;
     }
 
     @Override

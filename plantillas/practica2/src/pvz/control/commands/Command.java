@@ -3,7 +3,7 @@ package pvz.control.commands;
 import java.util.Arrays;
 import java.util.List;
 import pvz.logic.GameModel;
-import pvz.view.GameView;//printer y messages le dan igual, no?
+import pvz.view.GameView;
 
 public abstract class Command {
 	
@@ -15,7 +15,7 @@ public abstract class Command {
 
 	protected static final List<Command> AVAILABLE_COMMANDS = Arrays.asList(
 	    new AddPlantCommand(),
-	    //new AddZombieCommand(), comentos los de la 2.2 por si falla en las pruebas
+	    //new AddZombieCommand(), comentos los de la 2.2 para no liarme
 	    new ListPlantsCommand(),
 	    //new ListZombiesCommand(),
 	    new ResetCommand(),
@@ -36,16 +36,16 @@ public abstract class Command {
 	  
 	  
 	  //prpuesta parse() más corto comprobando entrada nula:
-	  public static Command parse(String[] commandWords) {//analiza la entrada del player y vdevuelve el comando correspondiente		
+	  public static Command parse(String[] c) {//analiza la entrada del player y vdevuelve el comando correspondiente		
 		  Command com = null;
-		  if (commandWords == null || commandWords.length == 0 || commandWords[0].isEmpty())  
+		  if (c == null || c.length == 0 || c[0].isEmpty())  
 			  com = new NoneCommand();//por si entrada vacía o nula (enter por ej)
 		  else {
 			  int i = 0;
 			  while (com == null && i < AVAILABLE_COMMANDS.size()) {
 				  Command command = AVAILABLE_COMMANDS.get(i);
 				//si la primera palabra (commandWords[0])coincide con el nombre del comando i:
-				  if (command.matchCommand(commandWords[0])) com = command.create(commandWords); //com == null es falsa y para el bucle
+				  if (command.matchCommand(c[0])) com = command.create(c); //com == null es falsa y para el bucle
 				  i++;
 			  }
 		  }
@@ -54,8 +54,7 @@ public abstract class Command {
 	   
 	  public boolean matchCommand(String c) {//comprueba si la palabra introdcida coincide con el name o shortcut del comando
 		  boolean match = false;
-		  if (c != null)
-		  match =  name.equalsIgnoreCase(c) || shortcut.equalsIgnoreCase(c);//no hacen falta getters, no?
+		  if (c != null) match = name.equalsIgnoreCase(c) || shortcut.equalsIgnoreCase(c);//no hacen falta getters
 		  return match;
 	  }
 	  
