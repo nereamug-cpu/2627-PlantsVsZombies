@@ -1,35 +1,37 @@
 package pvz.logic.gameobjects;
+
 import pvz.logic.GameWorld;
-import pvz.utils.*;
+import pvz.utils.Position;
 
 public abstract class GameObject implements GameItem {
 	protected GameWorld game;
 	protected Position position;
 	
-	GameObject(GameWorld game, Position p) {
+	public GameObject(GameWorld game, Position p) {
 		this.game = game;
 		this.position = p;
 	}
 	
 	public boolean isInPosition(Position other) {
-		return this.position.equals(other);
+		boolean isInPosition = false;
+        if (other != null && this.position != null) isInPosition = this.position.equals(other);
+        return isInPosition;	
 	}
 	
 	public Position getPosition() {
 		return position;
 	}
 	
-	abstract public String getIcon();
+	public abstract String getIcon();
 	
-	abstract public String getDescription();
+	public abstract String getDescription();
 	
-	abstract public boolean isAlive();
+	public abstract boolean isAlive();
 	
-	abstract public void onEnter();
+	public abstract void onEnter();
 	
-	abstract public void onExit();
+	public abstract void onExit();
 	
-	abstract public void update();
+	public abstract void update();
 	
-	//...
 }

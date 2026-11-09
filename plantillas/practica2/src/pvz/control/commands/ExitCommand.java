@@ -14,18 +14,9 @@ public class ExitCommand extends Command{
 			Messages.COMMAND_EXIT_HELP
 		);
 	}
-	/*
+
 	@Override
-	public Command create(String[] c) {
-		// comprobamos que String[] c no tiene más que un elemento, el propio comando
-		if (c.length != 1) {
-			return null;
-		}
-		return this;
-	}
-	*/
-	@Override
-	public void execute(GameModel gm, GameView gv) {
+	public void execute(GameModel gm, GameView gv) {//meto gv tb. polimorfismo
 		gm.quit();//jugador sale
 	}
 }

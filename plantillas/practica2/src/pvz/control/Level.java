@@ -8,19 +8,25 @@ public enum Level {
 	INSANE(10, 0.3);
 	
 	//PRIVADAS
-
-		private int numberOfZombies;
+	private final int numberOfZombies;//final pq no cambian una vez inicializados
+	private final double zombieFrequency;
 		
-		private double zombieFrequency;
-		
-		//CONSTRUCTORA
+	//CONSTRUCTORA
+	private Level(int numberOfZombies, double zombieFrequency) {
+		this.numberOfZombies = numberOfZombies;
+		this.zombieFrequency = zombieFrequency;
+	}
+	
+	public int getNumberOfZombies() {//Los he puesto otra vez pq como son private tiene que haber getters
+        return numberOfZombies;
+    }
 
-		private Level(int numberOfZombies, double zombieFrequency) {
-			this.numberOfZombies = numberOfZombies;
-			this.zombieFrequency = zombieFrequency;
-		}
+    public double getZombieFrequency() {
+        return zombieFrequency;
+    }
 	
 	
+    //Mantenemos estos métodos de las plantillas de la práctica 1:
 	public static Level valueOfIgnoreCase(String inputString) {
 		for (Level level : Level.values()) {
 			if (level.name().equalsIgnoreCase(inputString)) {

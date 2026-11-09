@@ -5,6 +5,7 @@ import pvz.view.GameView;
 import pvz.view.Messages;
 
 public class NoneCommand extends Command {
+	
 	public NoneCommand() {
 		super (
 				Messages.COMMAND_UPDATE_NAME, 
@@ -22,6 +23,8 @@ public class NoneCommand extends Command {
 
 	@Override
 	public boolean matchCommand(String c) {
-		return super.matchCommand(c) || c.isEmpty();
+		boolean match = super.matchCommand(c);//llama al matchCommand de la clase Command y comprueba concidencia
+		if (!match && c != null) match = c.isEmpty();//si no hay coincidencia pero tampoco es nula, devuelve si la c es vacía
+		return match;
 	}
 }

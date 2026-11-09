@@ -5,7 +5,6 @@ import pvz.logic.Game;
 import pvz.view.GamePrinter;
 import pvz.view.GameView;
 import pvz.view.Messages;
-//import pvz.utils.Position; //no necesario ya
 
 /**
  * Input/output coordinator of the game (the C in MVC).
@@ -22,7 +21,7 @@ public class Controller {
 	private final Game game;
 	private final GameView view;
 
-	//constructora. une game con la vista gameprinter
+	//constructora. une game (modelo)con la  gameprinter(vista)
 	public Controller(Game game) {
 		this.game = game;
 		this.view = new GamePrinter(game);
@@ -33,6 +32,7 @@ public class Controller {
 	 */
 	public void run() {
 		view.showGame(); //la vista muestra el estado inicial del tablero y del juego
+		
 		while (!game.hasGameFinished() && !game.playerQuits()) { //se ejecuta mientras la partida no termine			
 			//tiene que leer al player
 			String[] words = view.getPrompt();//declarado en game view, lee una alínea y la devuelve separada por espacios

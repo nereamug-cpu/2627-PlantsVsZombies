@@ -12,4 +12,6 @@ public interface GameModel {
 	boolean isInsideBoard(Position position);//si casilla válida dentro del tablero
 	boolean isEmpty(Position position); //si casilla vacía
 	boolean checkGameObject(String plantType);//si nombre de planta correcto
+	boolean hasGameFinished();
+    boolean playerQuits();
 }

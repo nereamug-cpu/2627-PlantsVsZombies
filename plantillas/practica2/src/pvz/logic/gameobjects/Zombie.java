@@ -1,7 +1,8 @@
 package pvz.logic.gameobjects;
-import pvz.utils.*;
-import pvz.view.Messages;
+
 import pvz.logic.GameWorld;
+import pvz.utils.Position;
+import pvz.view.Messages;
 
 public abstract class Zombie extends GameObject{
 	private int damage;

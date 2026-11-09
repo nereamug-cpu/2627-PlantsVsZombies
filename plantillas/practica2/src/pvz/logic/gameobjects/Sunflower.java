@@ -1,7 +1,8 @@
 package pvz.logic.gameobjects;
-import pvz.utils.*;
-import pvz.view.Messages;
+
 import pvz.logic.GameWorld;
+import pvz.utils.Position;
+import pvz.view.Messages;
 
 public class Sunflower extends Plant{
 	private static final int COST = 20;
@@ -12,14 +13,18 @@ public class Sunflower extends Plant{
 	
 	private int cycles;
 	
-	Sunflower(GameWorld game, Position p) {
+	public Sunflower(GameWorld game, Position p) {
 		super(game, p, COST, ENDURANCE, DAMAGE);
+		this.cycles = 0;
 	}
 	
 	
 	@Override
 	public String getIcon() {
-		return Messages.SUNFLOWER_ICON;
+	    String icon = "";
+	    if (isAlive()) icon = String.format(Messages.SUNFLOWER_ICON, getEndurance());
+	    else icon = String.format(Messages.SUNFLOWER_ICON, 0);
+	    return icon;
 	}
 	
 	@Override
@@ -37,4 +42,14 @@ public class Sunflower extends Plant{
 			cycles++;
 		}
 	}
+	
+	@Override
+    protected String getSymbol() {
+        return Messages.SUNFLOWER_SYMBOL;
+    }
+
+    @Override
+    protected String getNameAndShortcut() {
+        return Messages.SUNFLOWER_NAME_AND_SHORTCUT;
+    }
 }

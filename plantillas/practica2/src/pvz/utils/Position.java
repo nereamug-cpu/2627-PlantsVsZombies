@@ -36,21 +36,18 @@ public class Position {
 
 	@Override
 	public boolean equals(Object o) {
-		if (o == null) {
-			return false;
-		}
-		else if (o.getClass() == this.getClass()){
-			return ((Position) o).row() == (this.row()) && ((Position) o).column() == (this.column());		}
-		else {
-			return false;
-		}
+		boolean eq = false;
+		if (o != null && o.getClass() == this.getClass()) {
+			Position other = (Position) o;
+            eq = (other.row() == this.row) && (other.column() == this.col);		
+        }
+		return eq;
 	}
 	
 	@Override
 	public int hashCode() {
 		return Objects.hash(row,col);
 	}
-	
 	
 	public Position left() {
 		return new Position (row, col - 1);

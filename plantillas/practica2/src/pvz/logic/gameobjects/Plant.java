@@ -1,11 +1,12 @@
 package pvz.logic.gameobjects;
-import pvz.utils.*;
-import pvz.view.Messages;
+
 import pvz.logic.GameWorld;
+import pvz.utils.Position;
+import pvz.view.Messages;
 
 public abstract class Plant extends GameObject{
 	 private int cost;
-	 private int endurance;
+	 protected int endurance;
 	 private int damage;
 
 	 
@@ -44,5 +45,13 @@ public abstract class Plant extends GameObject{
 	 public boolean receiveZombieAttack(int damage) {
 		 endurance -= damage;
 		 return true;
+	 }
+	 
+	 public int getCost() {
+		    return this.cost;
+	 }
+	 
+	 public int getEndurance() {
+		    return this.endurance;
 	 }
 }

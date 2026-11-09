@@ -1,5 +1,5 @@
 package pvz.logic;
-//GameStatus ahora tiene solo los métodos relacionados con la VISTA
+//GameStatus ahora tiene solo los métodos relacionados con la VISTA, lectura
 import pvz.utils.Position;
 
 public interface GameStatus {

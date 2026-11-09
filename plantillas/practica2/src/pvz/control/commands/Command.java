@@ -51,47 +51,21 @@ public abstract class Command {
 		  }
 		  return  com;//devuelve null si recorre la lista y no encuentra coincidencia
 	  }
-	  
-	  /*ANTERIOR:
-	  public static Command parse(String[] commandWords) { 
-		boolean ok = false;
-	    int pos = 0;
-	    while (!ok && pos < AVAILABLE_COMMANDS.size()) {
-	    	Command command = AVAILABLE_COMMANDS.get(pos);
-	    	if (command.matchCommand(commandWords[0])) {
-	    		ok = true;
-	    	}
-	    	else {
-	    		pos++;
-	    	}
-	    }
-	    if (ok) {
-	    	return AVAILABLE_COMMANDS.get(pos).create(commandWords);
-	    }
-	    else {
-	    	return null;
-	    }
-	  }
-	   */
 	   
 	  public boolean matchCommand(String c) {//comprueba si la palabra introdcida coincide con el name o shortcut del comando
-		  return name.equalsIgnoreCase(c) || shortcut.equalsIgnoreCase(c);//no hacen falta getters, no?
+		  boolean match = false;
+		  if (c != null)
+		  match =  name.equalsIgnoreCase(c) || shortcut.equalsIgnoreCase(c);//no hacen falta getters, no?
+		  return match;
 	  }
 	  
-	  public Command create(String[] words) {//para no tener que implementar create en todos los comandos, no?
-		  return this;
+	  public Command create(String[] c) {//para no tener que implementar create en todos los comandos
+		  Command create = null;
+		  if (c != null && c.length == 1) create = this;
+		  return create;
 	  }
 	  
 	  public abstract void execute(GameModel gm, GameView gv);//ejecuta la acción del comando
-	  
-	  
-	  protected String getName() {
-		  return name;
-	  }
-	  
-	  protected String getShortcut() {
-		  return shortcut;
-	  }
 	  
 	  public String getDetails() {
 		  return details;

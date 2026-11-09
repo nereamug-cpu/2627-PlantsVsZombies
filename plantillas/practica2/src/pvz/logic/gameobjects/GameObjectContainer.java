@@ -1,16 +1,17 @@
 package pvz.logic.gameobjects;
-import java.util.List;
-import pvz.utils.*;
+
 import java.util.ArrayList;
+import java.util.List;
+import pvz.utils.Position;
 
 public class GameObjectContainer {
+	
 	private List<GameObject> gameObjects;
 	
 	public GameObjectContainer() {
 		gameObjects = new ArrayList<>();
 	}
 	
-	//...
 	public GameItem getGameItemInPosition(Position position) {
 		GameItem sol = null;
 		boolean found = false;
@@ -29,5 +30,9 @@ public class GameObjectContainer {
 		}
 		
 		return sol;
+	}
+	
+	public void add(GameObject o) {
+		if (o != null) this.gameObjects.add(o);
 	}
 }
