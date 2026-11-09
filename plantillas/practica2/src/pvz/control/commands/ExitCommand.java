@@ -1,15 +1,20 @@
 package pvz.control.commands;
-import pvz.logic.*;
-import pvz.view.*;
+
+import pvz.logic.GameModel; 
+import pvz.view.GameView;
+import pvz.view.Messages;
 
 public class ExitCommand extends Command{
-	public ExitCommand() {
-		this.name = Messages.COMMAND_EXIT_NAME;
-		this.shortcut = Messages.COMMAND_EXIT_SHORTCUT;
-		this.details = Messages.COMMAND_EXIT_DETAILS;
-		this.help = Messages.COMMAND_EXIT_HELP;
-	}
 	
+	public ExitCommand() {
+		super (
+			Messages.COMMAND_EXIT_NAME,
+			Messages.COMMAND_EXIT_SHORTCUT,
+			Messages.COMMAND_EXIT_DETAILS,
+			Messages.COMMAND_EXIT_HELP
+		);
+	}
+	/*
 	@Override
 	public Command create(String[] c) {
 		// comprobamos que String[] c no tiene más que un elemento, el propio comando
@@ -18,9 +23,9 @@ public class ExitCommand extends Command{
 		}
 		return this;
 	}
-	
+	*/
 	@Override
 	public void execute(GameModel gm, GameView gv) {
-		// ...
+		gm.quit();//jugador sale
 	}
 }
