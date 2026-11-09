@@ -22,7 +22,10 @@ public abstract class Plant extends GameObject{
 	 
 	 @Override
 	 public String getIcon() {
-		 return String.format(Messages.GAME_OBJECT_ICON, getSymbol(), endurance);
+		 int enduranceAux;
+		 if (isAlive()) enduranceAux = this.endurance;
+		 else enduranceAux = 0;
+		 return String.format(Messages.GAME_OBJECT_ICON, getSymbol(), enduranceAux);
 	 }
 	 
 	 @Override

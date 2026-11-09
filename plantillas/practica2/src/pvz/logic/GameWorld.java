@@ -11,5 +11,5 @@ public interface GameWorld {
 	boolean isEmpty(Position posicion);//si casilla vacía
 	boolean isInsideBoard(Position position);//si posición válida dentro del tablero
 	GameItem getGameItemInPosition(Position position);//para cosultar qué hay en la casilla
-	void generateCoins(int amount);
+	void addSuncoins(int amount);
 }

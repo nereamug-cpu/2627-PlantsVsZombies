@@ -58,9 +58,12 @@ public class AddPlantCommand extends Command{//extends por la herencia de la sup
 		//si los parámetros están mal escritos
 		if (!gm.checkGameObject(this.plantName)) gv.showError(Messages.INVALID_GAME_OBJECT);
 		//casilla mal
+		else if (!gm.isInsideBoard(pos) || !gm.isEmpty(pos)) gv.showError(Messages.INVALID_POSITION);
 		else {
-			gm.addGameObject(this.plantName, pos);//Model intenta añadir la planta al tablero
-			gv.showGame();
+			if (gm.addGameObject(this.plantName, pos)) {
+                gm.update();
+                gv.showGame();
+            } else  gv.showError(Messages.NOT_ENOUGH_COINS);
 		}	
 	}
 }

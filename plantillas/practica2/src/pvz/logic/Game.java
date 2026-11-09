@@ -1,5 +1,6 @@
 package pvz.logic;
 import java.util.Random;
+
 import pvz.logic.gameobjects.factories.PlantFactory;
 import pvz.logic.gameobjects.Plant;
 import pvz.control.Level;
@@ -31,6 +32,7 @@ public class Game implements GameStatus, GameWorld, GameModel {
 		numCycle  = 0;
 		suncoins = INITIAL_COINS;
 		playerQuits = false;
+		this.container = new GameObjectContainer();
 	}
 	
 	//TODO. Falta comentar lo que hace cada una auqnue sea obvio para que no nos penalice jeje:
@@ -53,6 +55,7 @@ public class Game implements GameStatus, GameWorld, GameModel {
     @Override
     public void update() {
         numCycle++;
+        container.update();
     }
 
     @Override
@@ -63,14 +66,14 @@ public class Game implements GameStatus, GameWorld, GameModel {
     @Override
     public void addGameObject(String plantType, Position position) {
         Plant plant = PlantFactory.spawnPlant(plantType, this, position);
-        if (plant != null) {
+        if (plant != null && this.suncoins >= plant.getCost()) {
             this.suncoins -= plant.getCost();//descuenta soles
             this.container.add(plant);//añade la planta a container
         }
     }
 
     @Override
-    public void generateCoins(int amount) {
+    public void addSuncoins(int amount) {
         this.suncoins += amount;
     }
 
@@ -87,13 +90,13 @@ public class Game implements GameStatus, GameWorld, GameModel {
     }
 
     @Override
-    public boolean isEmpty(Position position) {
-        return container.getGameItemInPosition(position) == null;
+    public boolean isEmpty(Position p) {
+        return container.getGameItemInPosition(p) == null;
     }
 
     @Override
     public boolean checkGameObject(String plantType) {
-        return true; 
+        return PlantFactory.spawnPlant(plantType, this, new Position(0, 0)) != null; 
     }
 
     @Override
@@ -102,8 +105,8 @@ public class Game implements GameStatus, GameWorld, GameModel {
     }
 
     @Override
-    public String positionToString(Position position) {
-        return "";
+    public String positionToString(Position p) {
+        return this.container.positionToString(p);
     }
 
     @Override
