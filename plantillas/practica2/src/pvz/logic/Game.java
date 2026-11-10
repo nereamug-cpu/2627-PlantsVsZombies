@@ -22,19 +22,15 @@ public class Game implements GameStatus, GameWorld, GameModel {
 	public Game(long seed, Level level) {
 		this.seed = seed;
 		this.level = level;
+		this.container = new GameObjectContainer();
 		initGame();
 	}
 	
-	private void initGame() { //separo del cosntructor para usar en reset
-		Random rand = new Random(seed); //rand solo se usa aquí, es variable local
-		/*
-		zombiesManager= new ZombiesManager(this, level, rand);
-		peashooters = new PeashooterList(); 
-		sunflowers = new SunflowerList();
-		*/
+	private void initGame() {
 		numCycle  = 0;
 		suncoins = INITIAL_COINS;
 		playerQuits = false;
+		this.container = new GameObjectContainer();
 	}
 	
 	//...
