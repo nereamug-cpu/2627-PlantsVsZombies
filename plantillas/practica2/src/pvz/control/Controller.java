@@ -1,8 +1,7 @@
 package pvz.control;
 
 import pvz.control.commands.Command;//necesario para comunicarse con parse()
-import pvz.logic.Game;
-import pvz.view.GamePrinter;
+import pvz.logic.GameModel;
 import pvz.view.GameView;
 import pvz.view.Messages;
 
@@ -18,13 +17,13 @@ import pvz.view.Messages;
 public class Controller {
 
 	//no cambian durante toda la aprtida
-	private final Game game;
+	private final GameModel game;
 	private final GameView view;
 
 	//constructora. une game (modelo)con la  gameprinter(vista)
-	public Controller(Game game) {
-		this.game = game;
-		this.view = new GamePrinter(game);
+	public Controller(GameModel gm, GameView gv) {
+		this.game = gm;
+		this.view = gv;
 	}
 
 	/**
@@ -33,10 +32,10 @@ public class Controller {
 	public void run() {
 		view.showGame(); //la vista muestra el estado inicial del tablero y del juego
 		
-		while (!game.hasGameFinished() && !game.playerQuits()) { //se ejecuta mientras la partida no termine			
+		while (!game.hasGameFinished()) { //se ejecuta mientras la partida no termine			
 			//tiene que leer al player
-			String[] words = view.getPrompt();//declarado en game view, lee una alínea y la devuelve separada por espacios
-			Command command = Command.parse(words); //ahora es el parse() quien busca el comando que coincida con el del player
+			String[] c = view.getPrompt();//declarado en game view, lee una alínea y la devuelve separada por espacios
+			Command command = Command.parse(c); //ahora es el parse() quien busca el comando que coincida con el del player
 										
 			//ahora solo
 			if (command != null) command.execute(game, view);//si es válido, se ejecuta
