@@ -1,6 +1,6 @@
 package pvz.control;
 
-import pvz.control.commands.Command;//necesario para comunicarse con parse()
+import pvz.control.command.Command;
 import pvz.logic.GameModel;
 import pvz.view.GameView;
 import pvz.view.Messages;
@@ -16,6 +16,10 @@ import pvz.view.Messages;
  */
 public class Controller {
 
+	// En los test aparece la constructora 
+	// Controller(Game game);
+	
+	
 	//no cambian durante toda la aprtida
 	private final GameModel game;
 	private final GameView view;

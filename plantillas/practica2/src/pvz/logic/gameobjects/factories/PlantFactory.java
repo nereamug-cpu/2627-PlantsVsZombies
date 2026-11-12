@@ -7,7 +7,7 @@ import pvz.logic.GameWorld;
 import pvz.logic.gameobjects.Peashooter;
 import pvz.logic.gameobjects.Plant;
 import pvz.logic.gameobjects.Sunflower;
-import pvz.utils.Position;
+import utils.Position;
 
 public class PlantFactory {
 	//lista con una plantilla de cada planta disponible en el juego
@@ -21,9 +21,9 @@ public class PlantFactory {
 		Plant plant = null;
         if (plantName != null) {
             if (plantName.equalsIgnoreCase("sunflower") || plantName.equalsIgnoreCase("s"))
-            	plant = new Sunflower(game, position);
+            	plant = new Sunflower(position, game);
             else if (plantName.equalsIgnoreCase("peashooter") || plantName.equalsIgnoreCase("p"))
-            	plant = new Peashooter(game, position);
+            	plant = new Peashooter(position, game);
         }
         return plant;
 	}
@@ -32,5 +32,23 @@ public class PlantFactory {
 	public static List<Plant> getAvailablePlants() {
 		return Collections.unmodifiableList(AVAILABLE_PLANTS);
 	}
+	
+	
+	/*
+	public static boolean isValidPlant(String plantName) {
+		if (plantName == null) return false;
+		Plant plant = null;
+		int pos = 0;
+		boolean found = false;
+		while (!found && pos < AVAILABLE_PLANTS.size()) {
+			plant = AVAILABLE_PLANTS.get(pos);
+			if (plant.getSymbol().equalsIgnoreCase(plantName) || plant.getnameAndShortcut().toLowerCase().contains(plantName.toLowerCase())) {
+				return true;
+			}
+			pos++;
+		}
+		return false;
+	}
+	 */
 
 }

@@ -1,8 +1,8 @@
 package pvz.logic;
 //GameWorld ahora tiene solo los métodos relacionados con OBJETOS. plntas y zombies
 
-import pvz.utils.Position;
-import pvz.logic.gameobjects.GameItem;
+import pvz.logic.gameobjects.*;
+import utils.Position;
 
 public interface GameWorld {
 	int NUM_ROWS = 4;//las variables declaradas en una interface son ya public static final, no hace falta ponerlo
@@ -10,6 +10,10 @@ public interface GameWorld {
 	
 	boolean isEmpty(Position p);//si casilla vacía
 	boolean isInsideBoard(Position p);//si posición válida dentro del tablero
+	boolean isInBoardLimit(Position p);
+	boolean isValidPosition(Position p);
 	GameItem getGameItemInPosition(Position p);//para cosultar qué hay en la casilla
 	void addSuncoins(int amount);
+	
+	boolean addGameObject(GameObject gameObject);
 }

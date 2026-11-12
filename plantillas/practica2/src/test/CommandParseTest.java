@@ -3,7 +3,7 @@ package test;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import pvz.control.commands.*;
+import pvz.control.command.*;
 import pvz.view.Messages;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,4 +1,7 @@
 package pvz.logic.gameobjects.factories;
+import pvz.logic.gameobjects.*;
+import utils.*;
+import pvz.logic.GameWorld;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +16,7 @@ public class ZombieFactory {
 		// ...
 	}
 	
-	public static List<Zombie> getAvailabkeZombies() {
+	public static List<Zombie> getAvailableZombies() {
 		return Collections.unmodifiableList(AVAILABLE_ZOMBIES);
 	}
 	

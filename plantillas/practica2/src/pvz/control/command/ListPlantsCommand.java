@@ -1,4 +1,4 @@
-package pvz.control.commands;
+package pvz.control.command;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,9 +1,9 @@
-package pvz.control.commands;
+package pvz.control.command;
 //import java.util.Scanner;//está Integer.parseInt()
 import pvz.logic.GameModel; 
 import pvz.view.GameView; 
-import pvz.view.Messages; 
-import pvz.utils.Position;
+import pvz.view.Messages;
+import utils.Position;
 
 public class AddPlantCommand extends Command{//extends por la herencia de la superclase
 	private String plantName;

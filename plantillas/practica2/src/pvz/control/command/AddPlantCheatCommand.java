@@ -1,22 +1,24 @@
-package pvz.control.commands;
+package pvz.control.command;
 import java.util.Scanner;
 
 
 import pvz.logic.*;
 import pvz.view.*;
 
-public class CatchCommand extends Command{
+public class AddPlantCheatCommand extends Command{
 	private int col;
 	private int row;
 	
-	public CatchCommand() {
-		this.name = Messages.COMMAND_CATCH_NAME;
-		this.shortcut = Messages.COMMAND_CATCH_SHORTCUT;
-		this.details = Messages.COMMAND_CATCH_DETAILS;
-		this.help = Messages.COMMAND_CATCH_HELP;
+	public AddPlantCheatCommand() {
+		super(
+				Messages.COMMAND_CATCH_NAME,
+				Messages.COMMAND_CATCH_SHORTCUT,
+				Messages.COMMAND_CATCH_DETAILS,
+				Messages.COMMAND_CATCH_HELP
+		);
 	}
 	
-	private CatchCommand(int c, int r) {
+	private AddPlantCheatCommand(int c, int r) {
 		this();
 		this.col = c;
 		this.row = r;
@@ -35,7 +37,7 @@ public class CatchCommand extends Command{
 		Scanner rowScanner = new Scanner(c[2]);
 		
 		// comprobamos que ambas sean números enteros
-		if (!colScanner.hasNextInt() || !rowScanner.hasNextInt(col )) {
+		if (!colScanner.hasNextInt() || !rowScanner.hasNextInt()) {
 			colScanner.close();
 			rowScanner.close();
 			return null;
@@ -48,11 +50,11 @@ public class CatchCommand extends Command{
 		colScanner.close();
 		rowScanner.close();
 		
-		return new CatchCommand(new_col, new_row);
+		return new AddPlantCheatCommand(new_col, new_row);
 	}
 	
 	@Override
 	public void execute(GameModel gm, GameView gv) {
-		
+		// ...
 	}
 }

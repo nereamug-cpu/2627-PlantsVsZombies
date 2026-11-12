@@ -1,7 +1,7 @@
 package pvz.logic.gameobjects;
 
 import pvz.logic.GameWorld;
-import pvz.utils.Position;
+import utils.Position;
 
 public abstract class GameObject implements GameItem {
 	protected GameWorld game;
@@ -33,5 +33,9 @@ public abstract class GameObject implements GameItem {
 	public abstract void onExit();
 	
 	public abstract void update();
+	
+	public abstract boolean canBeSpawnedAt(Position p);
+	
+	public abstract GameItem copy(Position p, GameWorld gM);
 	
 }

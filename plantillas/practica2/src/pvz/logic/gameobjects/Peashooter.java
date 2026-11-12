@@ -1,15 +1,15 @@
 package pvz.logic.gameobjects;
 
 import pvz.logic.GameWorld;
-import pvz.utils.Position;
 import pvz.view.Messages;
+import utils.Position;
 
 public class Peashooter extends Plant{
-	private static final int COST = 50;
-	private static final int ENDURANCE = 3;
-	private static final int DAMAGE = 1;
+	public static final int COST = 50;
+	public static final int ENDURANCE = 3;
+	public static final int DAMAGE = 1;
 	
-	public Peashooter(GameWorld game, Position p) {
+	public Peashooter(Position p, GameWorld game) {
 		super(game, p, COST, ENDURANCE, DAMAGE);
 	}
 	
@@ -40,7 +40,7 @@ public class Peashooter extends Plant{
 	            
 	            if (item != null) {
 	                // Al atacar al item, receiveZombieAttack o recibir ataque según la interfaz
-	                attackDone = item.receiveZombieAttack(this.getDamage());
+	                attackDone = item.receivePlantAttack(DAMAGE);
 	            } else {
 	                col++;
 	            }
@@ -49,12 +49,17 @@ public class Peashooter extends Plant{
 	}
 	
 	@Override
-    protected String getSymbol() {
+    public String getSymbol() {
         return Messages.PEASHOOTER_SYMBOL;
     }
 
     @Override
-    protected String getNameAndShortcut() {
+    public String getNameAndShortcut() {
         return Messages.PEASHOOTER_NAME_AND_SHORTCUT;
+    }
+    
+    @Override
+    public Plant copy(Position p, GameWorld gameWorld) {
+    	return new Peashooter(p, gameWorld);
     }
 }

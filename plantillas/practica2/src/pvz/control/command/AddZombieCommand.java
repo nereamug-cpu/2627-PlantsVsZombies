@@ -1,4 +1,4 @@
-package pvz.control.commands;
+package pvz.control.command;
 import java.util.Scanner;
 
 import pvz.logic.*;
@@ -10,10 +10,12 @@ public class AddZombieCommand extends Command {
 	private int col;
 	
 	public AddZombieCommand() {
-		this.name = Messages.COMMAND_ADD_ZOMBIE_NAME;
-		this.shortcut = Messages.COMMAND_ADD_ZOMBIE_SHORTCUT;
-		this.details = Messages.COMMAND_ADD_ZOMBIE_DETAILS;
-		this.help = Messages.COMMAND_ADD_ZOMBIE_HELP;
+		super(
+				Messages.COMMAND_ADD_ZOMBIE_NAME,
+				Messages.COMMAND_ADD_ZOMBIE_SHORTCUT,
+				Messages.COMMAND_ADD_ZOMBIE_DETAILS,
+				Messages.COMMAND_ADD_ZOMBIE_HELP
+		);
 	}
 	
 	private AddZombieCommand(String zN, int c, int r) {
@@ -55,6 +57,6 @@ public class AddZombieCommand extends Command {
 	
 	@Override
 	public void execute(GameModel gm, GameView gv) {
-		//...
+		// ...
 	}
 }

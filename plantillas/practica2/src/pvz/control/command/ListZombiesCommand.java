@@ -1,13 +1,15 @@
-package pvz.control.commands;
+package pvz.control.command;
 import pvz.logic.*;
 import pvz.view.*;
 
 public class ListZombiesCommand extends Command{
 	public ListZombiesCommand() {
-		this.name = Messages.COMMAND_LIST_ZOMBIES_NAME;
-		this.shortcut = Messages.COMMAND_LIST_ZOMBIES_SHORTCUT;
-		this.details = Messages.COMMAND_LIST_ZOMBIES_DETAILS;
-		this.help = Messages.COMMAND_LIST_ZOMBIES_HELP;
+		super(
+			Messages.COMMAND_LIST_ZOMBIES_NAME,
+			Messages.COMMAND_LIST_ZOMBIES_SHORTCUT,
+			Messages.COMMAND_LIST_ZOMBIES_DETAILS,
+			Messages.COMMAND_LIST_ZOMBIES_HELP
+		);
 	}
 	
 	@Override
@@ -21,6 +23,6 @@ public class ListZombiesCommand extends Command{
 	
 	@Override
 	public void execute(GameModel gm, GameView gv) {
-		//...
+		// ...
 	}
 }

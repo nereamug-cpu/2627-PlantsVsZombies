@@ -1,9 +1,9 @@
 package test;
 
+import pvz.view.GameView;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import pvz.view.GameView;
 
 /**
  * {@link GameView} that stores what commands ask it to show, so command tests can

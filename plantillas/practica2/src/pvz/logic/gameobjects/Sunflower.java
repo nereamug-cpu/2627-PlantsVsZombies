@@ -1,18 +1,18 @@
 package pvz.logic.gameobjects;
 
 import pvz.logic.GameWorld;
-import pvz.utils.Position;
 import pvz.view.Messages;
+import utils.Position;
 
 public class Sunflower extends Plant{
-	private static final int COST = 20;
-	private static final int ENDURANCE = 1;
-	private static final int PERIOD = 3;
-	private static final int DAMAGE = 0;
+	public static final int COST = 20;
+	public static final int ENDURANCE = 1;
+	public static final int PERIOD = 3;
+	public static final int DAMAGE = 0;
 	
 	private int cycles;
 	
-	public Sunflower(GameWorld game, Position p) {
+	public Sunflower(Position p, GameWorld game) {
 		super(game, p, COST, ENDURANCE, DAMAGE);
 		this.cycles = 0;
 	}
@@ -29,12 +29,17 @@ public class Sunflower extends Plant{
 	}
 	
 	@Override
-    protected String getSymbol() {
+    public String getSymbol() {
         return Messages.SUNFLOWER_SYMBOL;
     }
 
     @Override
-    protected String getNameAndShortcut() {
+    public String getNameAndShortcut() {
         return Messages.SUNFLOWER_NAME_AND_SHORTCUT;
+    }
+    
+    @Override
+    public Plant copy(Position p, GameWorld gameWorld) {
+    	return new Sunflower(p, gameWorld);
     }
 }

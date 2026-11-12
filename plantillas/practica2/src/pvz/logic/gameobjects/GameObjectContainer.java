@@ -1,9 +1,11 @@
 package pvz.logic.gameobjects;
 
 import java.util.ArrayList;
+
 import java.util.List;
-import pvz.utils.Position;
+
 import pvz.view.Messages;
+import utils.Position;
 
 public class GameObjectContainer {
 	
@@ -15,14 +17,14 @@ public class GameObjectContainer {
 	
 	public GameItem getGameItemInPosition(Position position) {
 		GameItem sol = null;
-		boolean enc = false;
+		boolean found = false;
 		int pos = 0;
 		
-		while (!enc && pos < gameObjects.size()) {
+		while (!found && pos < gameObjects.size()) {
 			GameObject object_actual = gameObjects.get(pos);
 			
 			if (object_actual.isInPosition(position)) {
-				enc = true;
+				found = true;
 				sol = object_actual;
 			}
 			else {
@@ -38,7 +40,10 @@ public class GameObjectContainer {
 	}
 	
 	public void update() {
-        for (int i = 0; i < gameObjects.size(); i++) gameObjects.get(i).update();
+        for (int i = 0; i < gameObjects.size(); i++) {
+        	gameObjects.get(i).update();
+        }
+        removeDead();
     }
 
 	public String positionToString(Position p) {
@@ -56,4 +61,42 @@ public class GameObjectContainer {
         return c;
     }
 	
+	public void removeDead() {
+		for (int i = 0; i < gameObjects.size(); i++) {
+			if (!gameObjects.get(i).isAlive()) {
+				gameObjects.remove(i);
+			}
+		}
+	}
+	
+	public boolean receiveDamage(Position p, int damage) {
+		boolean attacked = false;
+		boolean found = false;
+		int pos = 0;
+		while (!found && pos < gameObjects.size()) {
+			GameObject objectAct = gameObjects.get(pos);
+			if (objectAct.getPosition().equals(p)) {
+				found = true;
+				attacked = objectAct.receiveZombieAttack(damage) && objectAct.receivePlantAttack(damage);
+			}
+		}
+		return attacked;
+	}
+	
+	
+	public String iconInPosition(Position p) {
+		String icon = Messages.EMPTY_STRING;
+		boolean found = false;
+		int pos = 0;
+		
+		while (!found && pos < gameObjects.size()) {
+			GameObject objectAct = gameObjects.get(pos);
+			if (objectAct.getPosition().equals(p)) {
+				found = true;
+				icon = objectAct.getIcon();
+			}
+		}
+		
+		return icon;
+	}
 }
