@@ -9,6 +9,10 @@ public class WallNut extends Plant {
 	public static final int ENDURANCE = 10;
 	public static final int DAMAGE = 0;
 	
+	public WallNut() {
+		super(COST, ENDURANCE, DAMAGE);
+	}
+	
 	public WallNut(Position p, GameWorld gameWorld) {
 		super(gameWorld, p, COST, ENDURANCE, DAMAGE);
 	}

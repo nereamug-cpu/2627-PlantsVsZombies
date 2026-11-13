@@ -1,6 +1,7 @@
 package pvz.control.command;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import pvz.logic.GameModel;
 import pvz.view.GameView; 
@@ -21,15 +22,27 @@ public class ListPlantsCommand extends Command{
 
 	@Override //CAMBIAR TODO
 	public void execute(GameModel gm, GameView gv) {//muestra descripción de las plantas pero no avanza ciclo
-		List<String> lines = new ArrayList<>();
+		List<String> plantDescriptions = new ArrayList<>();
+		List<Plant> plants = PlantFactory.getAvailablePlants();
+		
+		for (int i = 0; i < plants.size(); i++) {
+			String description = plants.get(i).getDescription();
+			plantDescriptions.add(description);
+		}
+		
+		gv.showMessage(String.join(Messages.LINE_SEPARATOR, plantDescriptions));
+		
+		/*
+		List<String> plantsDescription = new ArrayList<>();
  
         // Obtenemos las descripciones de las plantas registradas en la factoría
         for (Plant plant : PlantFactory.getAvailablePlants()) {
-            lines.add(plant.getDescription());
+            plantsDescription.add(plant.getDescription());
         }
         
         // Muestra la lista formateada
-        gv.showMessage(String.join(Messages.LINE_SEPARATOR, lines));
+        gv.showMessage(String.join(Messages.LINE_SEPARATOR, plantsDescription));
+    	*/
     }	
 	
 }

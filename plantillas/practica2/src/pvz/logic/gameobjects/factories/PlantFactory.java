@@ -1,31 +1,45 @@
 package pvz.logic.gameobjects.factories;
 
 import java.util.Arrays;
+
 import java.util.Collections;
 import java.util.List;
 import pvz.logic.GameWorld;
-import pvz.logic.gameobjects.Peashooter;
-import pvz.logic.gameobjects.Plant;
-import pvz.logic.gameobjects.Sunflower;
+import pvz.logic.gameobjects.*;
+
 import utils.Position;
 
 public class PlantFactory {
 	//lista con una plantilla de cada planta disponible en el juego
 	private static final List<Plant> AVAILABLE_PLANTS = Arrays.asList(
-		new Sunflower(null, null), //primer param=tablero, segundo=posición. paso null pq list no necesita esa info
-	    new Peashooter(null, null)
+		new Sunflower(), //primer param=tablero, segundo=posición. paso null pq list no necesita esa info
+	    new Peashooter(),
+	    new CherryBomb(),
+	    new WallNut()
 	);
 	
 	//crea y devuelve nueva instancia de la planta segun el nombre de planta que escribe el jugador
 	public static Plant spawnPlant(String plantName, GameWorld game, Position position) {
-		Plant plant = null;
-        if (plantName != null) {
-            if (plantName.equalsIgnoreCase("sunflower") || plantName.equalsIgnoreCase("s"))
-            	plant = new Sunflower(position, game);
-            else if (plantName.equalsIgnoreCase("peashooter") || plantName.equalsIgnoreCase("p"))
-            	plant = new Peashooter(position, game);
-        }
-        return plant;
+		boolean found = false;
+		int pos = 0;
+		Plant p = null;
+		
+		while (!found && pos < AVAILABLE_PLANTS.size()) {
+			p = AVAILABLE_PLANTS.get(pos);
+			if (p.getName().equalsIgnoreCase(plantName)) {
+				found = true;
+			}
+			pos++;
+		}
+		
+		if(!found) {
+			p = null;
+		}
+		else {
+			p = p.copy(position, game);
+		}
+		
+		return p;
 	}
 	
 	//devuelve la lista no modificable de las plantas disponibles . lo usa listplantscommans

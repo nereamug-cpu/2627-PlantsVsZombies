@@ -1,6 +1,6 @@
 package pvz.control.command;
 //import java.util.Scanner;//está Integer.parseInt()
-import pvz.logic.GameModel; 
+import pvz.logic.GameModel;
 import pvz.view.GameView; 
 import pvz.view.Messages;
 import utils.Position;
@@ -55,15 +55,23 @@ public class AddPlantCommand extends Command{//extends por la herencia de la sup
 	@Override
 	public void execute(GameModel gm, GameView gv) {
 		Position pos = new Position(row, col);
+	
 		//si los parámetros están mal escritos
-		if (!gm.checkGameObject(this.plantName)) gv.showError(Messages.INVALID_GAME_OBJECT);
+		if (!gm.validPlantName(this.plantName)) {
+			gv.showError(Messages.INVALID_GAME_OBJECT);
+		}
 		//casilla mal
-		else if (!gm.isInsideBoard(pos) || !gm.isEmpty(pos)) gv.showError(Messages.INVALID_POSITION);
+		else if (!gm.isInsideBoard(pos) || !gm.isEmpty(pos)) {
+			gv.showError(Messages.INVALID_POSITION);
+		}
 		else {
 			if (gm.addGameObject(this.plantName, pos)) {
                 gm.update();
                 gv.showGame();
-            } else  gv.showError(Messages.NOT_ENOUGH_COINS);
+            } 
+			else  {
+				gv.showError(Messages.NOT_ENOUGH_COINS);
+			}
 		}	
 	}
 }

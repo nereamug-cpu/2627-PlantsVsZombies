@@ -1,8 +1,10 @@
 package pvz.logic;
 
 import java.util.Random;
+import java.util.List;
 import pvz.control.Level;
 import pvz.logic.gameobjects.Zombies;
+import pvz.logic.gameobjects.factories.ZombieFactory;
 import utils.Position;
 
 
@@ -35,7 +37,7 @@ public class ZombieManager {
 	 * @return <code>true</code> if a zombie should be added to the game.
 	 */
 	private boolean shouldAddZombie() {
-		return rand.nextDouble() < level.getZombieFrequency();
+		return rand.nextDouble() < level.getZombieFrequency() && remainingZombies > 0;
 	}
 	
 	/**
@@ -47,34 +49,36 @@ public class ZombieManager {
 	private int randomZombieRow() {
 		return rand.nextInt(Game.NUM_ROWS);
 	}
-	
-	public boolean addZombie() {
-		int row = randomZombieRow();
-		return addZombie(row);
-	}
 
-	public boolean addZombie(int row) {
+	public void addZombie() {
+		int row = randomZombieRow();
 		Position spawnPos = new Position(row, GameWorld.NUM_COLS);
 		
-		//si quedan, probabilidad se cumple y casilla vacía
-		boolean canAdd = getRemainingZombies() > 0 && shouldAddZombie() && game.isEmpty(spawnPos);
+		String zombieName = randomZombieName();
+		
+		Zombies newZombie = ZombieFactory.spawnZombie(zombieName, game, spawnPos);
 
-		if(canAdd) {
-			// TODO fill your code
-			Zombies zombie = new Zombies(spawnPos, this.game);
-			if (game.addGameObject(zombie)) {
-				remainingZombies--;
-			}
+		// si se ha podido añadir el Zombie entonces restamos el número de zombies que faltan
+		if (newZombie != null && game.addGameObject(newZombie)) {
+			remainingZombies--;
 		}
-		return canAdd;
+	}
+	
+	private String randomZombieName() {
+		// Obtenemos la lista de Zombies disponibles
+		List<Zombies> zombiesList = ZombieFactory.getAvailableZombies();
+		// Elegimos una posición de la lista aleatoria para obtener un zombie aleatorio
+		int randomListPos = rand.nextInt(zombiesList.size());
+		
+		// Devolvemos el nombre de ese Zombie aleatorio
+		return zombiesList.get(randomListPos).getName();
 	}
 	
 	public void update() {
-		addZombie();
+		if (shouldAddZombie()) {
+			addZombie();
+		}
 	}
-		
-	
-	// TODO fill your code
 	
 	public int getRemainingZombies() {
 		return remainingZombies;

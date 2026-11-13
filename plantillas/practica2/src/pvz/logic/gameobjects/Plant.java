@@ -10,6 +10,12 @@ public abstract class Plant extends GameObject{
 	 protected int endurance;
 	 private int damage;
 
+	 Plant(int cost, int endurance, int damage) {
+		 super();
+		 this.cost = cost;
+		 this.endurance = endurance;
+		 this.damage = damage;
+	 }
 	 
 	 Plant(GameWorld game, Position p, int cost, int endurance, int damage) {
 		 super(game, p);

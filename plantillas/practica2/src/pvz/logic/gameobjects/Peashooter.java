@@ -9,6 +9,10 @@ public class Peashooter extends Plant{
 	public static final int ENDURANCE = 3;
 	public static final int DAMAGE = 1;
 	
+	public Peashooter() {
+		super(COST, ENDURANCE, DAMAGE);
+	}
+	
 	public Peashooter(Position p, GameWorld game) {
 		super(game, p, COST, ENDURANCE, DAMAGE);
 	}
@@ -32,17 +36,16 @@ public class Peashooter extends Plant{
 	    if (isAlive()) {
 	        Position p = getPosition();
 	        boolean hit = false;
-	        int col = p.column() + 1;
+	        Position target = p.right();
 
-	        while (!hit && col < GameWorld.NUM_COLS) {
-	            Position target = new Position(p.row(), col);
+	        while (!hit && game.isInsideBoard(target)) {
 	            GameItem item = game.getGameItemInPosition(target);
 	            
 	            if (item != null) {
 	                // Al atacar al item, receiveZombieAttack o recibir ataque según la interfaz
 	                hit = item.receivePlantAttack(DAMAGE);
 	            } else {
-	                col++;
+	                target = target.right();
 	            }
 	        }
 	    }

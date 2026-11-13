@@ -4,22 +4,25 @@ import java.util.Scanner;
 
 import pvz.logic.*;
 import pvz.view.*;
+import utils.Position;
 
 public class AddPlantCheatCommand extends Command{
+	private String plantName;
 	private int col;
 	private int row;
 	
 	public AddPlantCheatCommand() {
-		super(
-				Messages.COMMAND_CATCH_NAME,
-				Messages.COMMAND_CATCH_SHORTCUT,
-				Messages.COMMAND_CATCH_DETAILS,
-				Messages.COMMAND_CATCH_HELP
+		super (
+				Messages.COMMAND_CHEAT_PLANT_NAME,
+				Messages.COMMAND_CHEAT_PLANT_SHORTCUT,
+				Messages.COMMAND_CHEAT_PLANT_DETAILS,
+				Messages.COMMAND_CHEAT_PLANT_HELP
 		);
 	}
 	
-	private AddPlantCheatCommand(int c, int r) {
+	private AddPlantCheatCommand(String pN, int c, int r) {
 		this();
+		this.plantName = pN;
 		this.col = c;
 		this.row = r;
 	}
@@ -27,34 +30,49 @@ public class AddPlantCheatCommand extends Command{
 	
 	@Override
 	public Command create(String[] c) {
-		// comprobamos que String[] c tenga 3 elementos, los que necesita CatchCommand
-		if (c.length != 3) {
+		// comprobamos que String[] c tenga cuatro parámetros, los que necesita CheatPlantCommand
+		if (c.length != 4) {
 			return null;
 		}
 		
+		String pN = c[1];
 		// leemos la columna y la fila de String[] c
-		Scanner colScanner = new Scanner(c[1]);
-		Scanner rowScanner = new Scanner(c[2]);
+		Scanner colScanner = new Scanner(c[2]);
+		Scanner rowScanner = new Scanner(c[3]);
 		
-		// comprobamos que ambas sean números enteros
+		// comprobamos que ambas son números
 		if (!colScanner.hasNextInt() || !rowScanner.hasNextInt()) {
 			colScanner.close();
 			rowScanner.close();
 			return null;
 		}
 		
-		// creamos variables y almacenamos los valores enteros
+		// creamos variables en las que guardamos los valores enteros
 		int new_col = colScanner.nextInt();
 		int new_row = rowScanner.nextInt();
 		
 		colScanner.close();
 		rowScanner.close();
 		
-		return new AddPlantCheatCommand(new_col, new_row);
+		return new AddPlantCheatCommand(pN, new_col, new_row);
 	}
+	
 	
 	@Override
 	public void execute(GameModel gm, GameView gv) {
-		// ...
+		Position pos = new Position(row, col);
+		//si los parámetros están mal escritos
+		if (!gm.checkGameObject(this.plantName)) gv.showError(Messages.INVALID_GAME_OBJECT);
+		//casilla mal
+		else if (!gm.isInsideBoard(pos) || !gm.isEmpty(pos)) gv.showError(Messages.INVALID_POSITION);
+		else {
+            if (gm.addGameObjectForFree(plantName, pos)) {
+				gm.update();
+                gv.showGame();
+            }
+            else {
+            	gv.showError(Messages.NOT_ENOUGH_COINS);
+            }
+		}
 	}
 }

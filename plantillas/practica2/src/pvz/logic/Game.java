@@ -1,9 +1,11 @@
 package pvz.logic;
 import java.util.Random;
-
+import pvz.logic.gameobjects.GameObject;
 import pvz.logic.gameobjects.factories.PlantFactory;
+import pvz.logic.gameobjects.factories.ZombieFactory;
 import utils.Position;
 import pvz.logic.gameobjects.Plant;
+import pvz.logic.gameobjects.Zombies;
 import pvz.control.Level;
 import pvz.logic.gameobjects.GameObjectContainer;
 import pvz.logic.gameobjects.GameItem;
@@ -73,18 +75,6 @@ public class Game implements GameStatus, GameWorld, GameModel {
         numCycle++;
         zombieManager.update();
         container.update();
-        
-        // Comprobamos si debe aparecer un zombie
-        if (remainingZombies > 0 && rand.nextDouble() < level.getZombieFrequency()) {
-        	int zombieRow = rand.nextInt(Game.NUM_ROWS);
-        	
-        	// La posición del nuevo zombie será en una fila aleatoria y en la columna de la derecha (NUM_COLS)
-        	Position spawnPos = new Position(zombieRow, NUM_COLS);
-        	
-        	// falta el ZombieFactory
-        	
-        	remainingZombies--;
-        }
     }
 
     @Override
@@ -93,26 +83,61 @@ public class Game implements GameStatus, GameWorld, GameModel {
     }
 
     @Override
-    public boolean addGameObject(String plantType, Position p) {
-    	boolean add = false;
-        Plant plant = PlantFactory.spawnPlant(plantType, this, p);
+    public boolean addGameObject(String objectName, Position p) {
+    	// comprobamos si objectName coincide con alguno de los nombres de las plantas disponibles
+        Plant plant = PlantFactory.spawnPlant(objectName, this, p);
+        
+        // si nos devuelve null entonces el objectName no corresponde al de una planta
         if (plant != null && this.suncoins >= plant.getCost()) {
             this.suncoins -= plant.getCost();//descuenta soles
-            this.container.add(plant);//añade la planta a container
-            add = true;
+            return addGameObject(plant);
         }
-        return add;
+        
+        /* Creo que no hace falta
+        
+        // comprobamos si objectName coincide con alguno de los nombres de los zombies disponibles
+        Zombies zombie = ZombieFactory.spawnZombie(objectName, this, p);
+        
+        // si nos devuelve null entonces el objectName no corresponde al de un zombie
+        if (zombie != null) {
+        	return addGameObject(zombie);
+        }
+        
+        */
+        
+        return false;
     }
     
     @Override
-    public boolean addGameObjectForFree(String plantType, Position p) {
-    	boolean add = false;
-        Plant plant = PlantFactory.spawnPlant(plantType, this, p);
+    public boolean addGameObjectForFree(String objectName, Position p) {
+    	// comprobamos si objectName coincide con alguno de los nombres de las plantas disponibles
+        Plant plant = PlantFactory.spawnPlant(objectName, this, p);
+        
+        // si nos devuelve null entonces el objectName no corresponde al de una planta
         if (plant != null) {
-            this.container.add(plant);//añade la planta a container
-            add = true;
+        	// no comprobamos si tenemos suficientes suncoins
+            return addGameObject(plant);
         }
-        return add;
+        
+        // comprobamos si objectName coincide con alguno de los nombres de los zombies disponibles
+        Zombies zombie = ZombieFactory.spawnZombie(objectName, this, p);
+        
+        // si nos devuelve null entonces el objectName no corresponde al de un zombie
+        if (zombie != null) {
+        	return addGameObject(zombie);
+        }
+        
+        return false;
+    }
+    
+    @Override
+    public boolean addGameObject(GameObject gameObject) {
+    	if (gameObject == null) {
+    		return false;
+    	}
+    	
+    	container.add(gameObject);
+    	return true;
     }
 
     @Override
@@ -158,12 +183,13 @@ public class Game implements GameStatus, GameWorld, GameModel {
     }
 
     @Override
-    public boolean checkGameObject(String plantType) {
-    	boolean check = false;
-    	if (plantType != null) {
-    		check = PlantFactory.spawnPlant(plantType, this, new Position(0, 0)) != null; 
-    	}
-        return check;
+    public boolean validPlantName(String plantName) {
+    	return PlantFactory.validPlantName(plantName);
+    }
+    
+    @Override
+    public boolean validZombieName(String zombieName) {
+    	return ZombieFactory.validZombieName(zombieName);
     }
 
     @Override

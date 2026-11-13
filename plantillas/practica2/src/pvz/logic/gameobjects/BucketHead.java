@@ -11,6 +11,10 @@ public class BucketHead extends Zombies {
 	
 	private int cycles;
 	
+	public BucketHead() {
+		super(DAMAGE, ENDURANCE, SPEED);
+	}
+	
 	public BucketHead(Position p, GameWorld gameWorld) {
 		super(gameWorld, p, DAMAGE, ENDURANCE, SPEED);
 	}

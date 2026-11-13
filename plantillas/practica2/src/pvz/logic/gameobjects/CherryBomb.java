@@ -9,6 +9,10 @@ public class CherryBomb extends Plant{
 	public static final int ENDURANCE = 2;
 	public static final int DAMAGE = 10;
 	
+	public CherryBomb() {
+		super(COST, ENDURANCE, DAMAGE);
+	}
+	
 	public CherryBomb(Position p,  GameWorld gameWorld) {
 		super(gameWorld, p, COST, ENDURANCE, DAMAGE);
 	}
@@ -28,10 +32,7 @@ public class CherryBomb extends Plant{
 		return Messages.CHERRY_BOMB_NAME_SHORTCUT;
 	}
 	
-	@Override
-	public void update() {
-		// ...
-	}
+	// Falta update() porque hay que añadir la explosión
 	
 	@Override
 	public Plant copy(Position p, GameWorld gameWorld) {

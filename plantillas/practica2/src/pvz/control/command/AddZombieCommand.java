@@ -1,6 +1,6 @@
 package pvz.control.command;
 import java.util.Scanner;
-
+import utils.Position;
 import pvz.logic.*;
 import pvz.view.*;
 
@@ -57,6 +57,21 @@ public class AddZombieCommand extends Command {
 	
 	@Override
 	public void execute(GameModel gm, GameView gv) {
-		// ...
+		Position pos = new Position(row, col);
+		
+		// si los parámetros están mal escritos
+		if (!gm.validZombieName(this.zombieName)) {
+			gv.showError(Messages.INVALID_GAME_OBJECT);
+		}
+		// casilla mal
+		else if (!gm.isInsideBoard(pos) || !gm.isEmpty(pos)) {
+			gv.showError(Messages.INVALID_POSITION);
+		}
+		else {
+			if (gm.addGameObjectForFree(this.zombieName, pos)) {
+				gm.update();
+				gv.showGame();
+			}
+		}
 	}
 }

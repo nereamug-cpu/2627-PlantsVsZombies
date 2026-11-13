@@ -11,6 +11,10 @@ public class Zombie extends Zombies {
 	
 	private int cycles;
 	
+	public Zombie() {
+		super(DAMAGE, ENDURANCE, SPEED);
+	}
+	
 	public Zombie(Position p, GameWorld gameWorld) {
 		super(gameWorld, p, DAMAGE, ENDURANCE, SPEED);
 		cycles = 0;

@@ -10,6 +10,12 @@ public abstract class Zombies extends GameObject{
 	private int endurance;
 	private int speed;
 	
+	Zombies(int damage, int endurance, int speed) {
+		this.damage = damage;
+		this.endurance = endurance;
+		this.speed = speed;
+	}
+	
 	Zombies(GameWorld game, Position p, int damage, int endurance, int speed) {
 		super(game, p);
 		this.damage = damage;

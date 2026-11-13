@@ -15,15 +15,15 @@ public abstract class Command {
 
 	protected static final List<Command> AVAILABLE_COMMANDS = Arrays.asList(
 	    new AddPlantCommand(),
-	    //new AddZombieCommand(), comentos los de la 2.2 para no liarme
+	    new AddZombieCommand(), 
 	    new ListPlantsCommand(),
-	    //new ListZombiesCommand(),
+	    new ListZombiesCommand(),
 	    new ResetCommand(),
 	    new HelpCommand(),
 	    new ExitCommand(),
-	    new NoneCommand()
-	    //new CheatPlantCommand(),
-	    //new CatchCommand()
+	    new NoneCommand(),
+	    new AddPlantCheatCommand(),
+	    new CatchCommand()
 	  );
 	  
 	  //constructora

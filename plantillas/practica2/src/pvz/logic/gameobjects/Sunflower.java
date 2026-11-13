@@ -13,6 +13,10 @@ public class Sunflower extends Plant{
 	
 	private int cycles;
 	
+	public Sunflower() {
+		super(COST, ENDURANCE, DAMAGE);
+	}
+	
 	public Sunflower(Position p, GameWorld game) {
 		super(game, p, COST, ENDURANCE, DAMAGE);
 		this.cycles = 0;

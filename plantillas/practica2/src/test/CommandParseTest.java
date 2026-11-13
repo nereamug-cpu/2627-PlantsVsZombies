@@ -36,8 +36,8 @@ class CommandParseTest extends CommandTestBase {
 
     @Test
     void cheatPlant_byNameAndShortcut() {
-        assertParsesTo(AddPlantCheatCommand.class, "cheatPlant", "p", "0", "0");
-        assertParsesTo(AddPlantCheatCommand.class, "cp", "p", "0", "0");
+        assertParsesTo(CatchCommand.class, "cheatPlant", "p", "0", "0");
+        assertParsesTo(CatchCommand.class, "cp", "p", "0", "0");
     }
 
     @Test

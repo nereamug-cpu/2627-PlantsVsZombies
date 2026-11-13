@@ -9,11 +9,34 @@ import java.util.Collections;
 
 public class ZombieFactory {
 	private static final List<Zombies> AVAILABLE_ZOMBIES = Arrays.asList(
-		// ...
+		new Zombie(),
+		new BucketHead(),
+		new SportyZombie(),
+		new ExplosiveZombie()
 	);
 	
 	public static Zombies spawnZombie(String zombieName, GameWorld game, Position position) {
-		// ...
+		boolean found = false;
+		int pos = 0;
+		Zombies zombie = null;
+		
+		while (!found && pos < AVAILABLE_ZOMBIES.size()) {
+			zombie = AVAILABLE_ZOMBIES.get(pos);
+			
+			if (zombie.getName().equalsIgnoreCase(zombieName)) {
+				found = true;
+			}
+			pos++;
+		}
+		
+		if (!found) {
+			zombie = null;
+		}
+		else {
+			zombie = zombie.copy(position, game);
+		}
+		
+		return zombie;
 	}
 	
 	public static List<Zombies> getAvailableZombies() {
