@@ -36,6 +36,4 @@ public abstract class GameObject implements GameItem {
 	
 	public abstract boolean canBeSpawnedAt(Position p);
 	
-	public abstract GameItem copy(Position p, GameWorld gM);
-	
 }

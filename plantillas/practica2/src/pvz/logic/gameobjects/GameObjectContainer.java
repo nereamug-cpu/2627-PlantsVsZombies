@@ -2,8 +2,9 @@ package pvz.logic.gameobjects;
 
 import java.util.ArrayList;
 
-import java.util.List;
 
+import java.util.List;
+import pvz.logic.Game;
 import pvz.view.Messages;
 import utils.Position;
 
@@ -52,9 +53,9 @@ public class GameObjectContainer {
         int i = 0;
         
         while (!found && i < gameObjects.size()) {
-            GameObject o = gameObjects.get(i);
-            if (o.isInPosition(p) && o.isAlive()) {
-                c = o.getIcon();
+            GameObject objectAct = gameObjects.get(i);
+            if (objectAct.isInPosition(p) && objectAct.isAlive()) {
+                c = objectAct.getIcon();
                 found = true;
             } else i++;
         }
@@ -98,5 +99,19 @@ public class GameObjectContainer {
 		}
 		
 		return icon;
+	}
+	
+	public boolean doZombieReachTheHouse() {
+		boolean reach = false;
+		int pos = 0;
+		
+		while (!reach && pos < gameObjects.size()) {
+			GameObject objectAct = gameObjects.get(pos);
+			if (objectAct.getPosition().column() < 0) {
+				reach = true;
+			}
+		}
+		
+		return reach;
 	}
 }

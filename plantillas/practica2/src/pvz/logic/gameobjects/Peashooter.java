@@ -31,16 +31,16 @@ public class Peashooter extends Plant{
 	public void update() {
 	    if (isAlive()) {
 	        Position p = getPosition();
-	        boolean attackDone = false;
+	        boolean hit = false;
 	        int col = p.column() + 1;
 
-	        while (!attackDone && col < GameWorld.NUM_COLS) {
-	            Position targetPos = new Position(p.row(), col);
-	            GameItem item = game.getGameItemInPosition(targetPos);
+	        while (!hit && col < GameWorld.NUM_COLS) {
+	            Position target = new Position(p.row(), col);
+	            GameItem item = game.getGameItemInPosition(target);
 	            
 	            if (item != null) {
 	                // Al atacar al item, receiveZombieAttack o recibir ataque según la interfaz
-	                attackDone = item.receivePlantAttack(DAMAGE);
+	                hit = item.receivePlantAttack(DAMAGE);
 	            } else {
 	                col++;
 	            }
@@ -61,5 +61,10 @@ public class Peashooter extends Plant{
     @Override
     public Plant copy(Position p, GameWorld gameWorld) {
     	return new Peashooter(p, gameWorld);
+    }
+    
+    @Override
+    public String getName() {
+    	return Messages.PEASHOOTER_NAME;
     }
 }

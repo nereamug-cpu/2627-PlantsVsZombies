@@ -8,15 +8,15 @@ import java.util.List;
 import java.util.Collections;
 
 public class ZombieFactory {
-	private static final List<Zombie> AVAILABLE_ZOMBIES = Arrays.asList(
+	private static final List<Zombies> AVAILABLE_ZOMBIES = Arrays.asList(
 		// ...
 	);
 	
-	public static Zombie spawnZombie(String zombieName, GameWorld game, Position position) {
+	public static Zombies spawnZombie(String zombieName, GameWorld game, Position position) {
 		// ...
 	}
 	
-	public static List<Zombie> getAvailableZombies() {
+	public static List<Zombies> getAvailableZombies() {
 		return Collections.unmodifiableList(AVAILABLE_ZOMBIES);
 	}
 	

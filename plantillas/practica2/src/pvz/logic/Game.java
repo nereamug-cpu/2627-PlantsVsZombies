@@ -15,8 +15,8 @@ public class Game implements GameStatus, GameWorld, GameModel {
 	public static final int INITIAL_COINS = 50;
 	
 	private boolean playerQuits;
-	private final Level level;
-	private final long seed;
+	private Level level;
+	private long seed;
 	private Random rand;
 	private int numCycle;
 	private int suncoins;
@@ -59,6 +59,13 @@ public class Game implements GameStatus, GameWorld, GameModel {
     public void reset() {
         initGame();
     }
+	
+	@Override
+	public void reset(Level level, long seed) {
+		this.level = level;
+		this.seed = seed;
+		initGame();
+	}
 
     @Override
     public void update() {
@@ -171,7 +178,7 @@ public class Game implements GameStatus, GameWorld, GameModel {
 
     @Override
     public boolean playerWins() {
-        return remainingZombies == 0 && container.allZombiesWereKilled();
+        return remainingZombies == 0 && zombieManager.allZombiesWereKilled();
     }
 
     @Override
@@ -181,11 +188,11 @@ public class Game implements GameStatus, GameWorld, GameModel {
 
     @Override
     public boolean hasGameFinished() {
-        return playerQuits || playerWins() || container.zombiesReachedHouse();
+        return playerQuits || playerWins() || container.doZombieReachTheHouse();
     }
     
     @Override
     public boolean doZombiesReachTheHouse() {
-    	// ...
+    	return container.doZombieReachTheHouse();
     }
 }

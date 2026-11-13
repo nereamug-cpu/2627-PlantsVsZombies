@@ -20,6 +20,7 @@ public abstract class Plant extends GameObject{
 	 
 	 public abstract String getSymbol();
 	 public abstract String getNameAndShortcut();
+	 public abstract String getName();
 	 
 	 @Override
 	 public String getIcon() {

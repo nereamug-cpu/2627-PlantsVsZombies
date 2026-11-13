@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pvz.logic.gameobjects.GameObject;
 import pvz.logic.gameobjects.Plant;
-import pvz.logic.gameobjects.Zombie;
+import pvz.logic.gameobjects.Zombies;
 import pvz.logic.gameobjects.factories.PlantFactory;
 import pvz.logic.gameobjects.factories.ZombieFactory;
 import test.FakeGameWorld;
@@ -101,7 +101,7 @@ class FactoriesTest {
     @Test
     void zombieCatalogue_hasTheFourKindsOfZombie() {
         Set<String> descriptions = ZombieFactory.getAvailableZombies().stream()
-                .map(Zombie::getDescription).collect(Collectors.toSet());
+                .map(Zombies::getDescription).collect(Collectors.toSet());
 
         assertEquals(Set.of(
                 "Zombie: speed='2', damage='1', endurance='5'",
@@ -115,7 +115,7 @@ class FactoriesTest {
         String[][] symbolsAndIcons = {
                 {"z", " Z[05]"}, {"bz", "Bz[08]"}, {"sz", "Sz[02]"}, {"ez", "Ez[05]"}};
         for (String[] pair : symbolsAndIcons) {
-            Zombie zombie = ZombieFactory.spawnZombie(pair[0], world, P);
+            Zombies zombie = ZombieFactory.spawnZombie(pair[0], world, P);
             assertNotNull(zombie, pair[0]);
             assertEquals(pair[1], zombie.getIcon());
         }
@@ -139,8 +139,8 @@ class FactoriesTest {
 
     @Test
     void spawnZombie_createsANewZombieAtThePosition_eachTime() {
-        Zombie first = ZombieFactory.spawnZombie("z", world, P);
-        Zombie second = ZombieFactory.spawnZombie("z", world, P);
+        Zombies first = ZombieFactory.spawnZombie("z", world, P);
+        Zombies second = ZombieFactory.spawnZombie("z", world, P);
 
         assertNotSame(first, second);
         assertTrue(first.isInPosition(P));
@@ -149,8 +149,8 @@ class FactoriesTest {
 
     @Test
     void zombieCatalogue_cannotBeModifiedByClients() {
-        List<Zombie> catalogue = ZombieFactory.getAvailableZombies();
-        Zombie extra = ZombieFactory.spawnZombie("z", world, P);
+        List<Zombies> catalogue = ZombieFactory.getAvailableZombies();
+        Zombies extra = ZombieFactory.spawnZombie("z", world, P);
         assertThrows(UnsupportedOperationException.class, () -> catalogue.add(extra));
         assertThrows(UnsupportedOperationException.class, catalogue::clear);
     }
@@ -161,7 +161,7 @@ class FactoriesTest {
             GameObject asZombie = ZombieFactory.spawnZombie(plant.getSymbol(), world, P);
             assertNull(asZombie, plant.getSymbol() + " is a plant symbol");
         }
-        for (Zombie zombie : ZombieFactory.getAvailableZombies()) {
+        for (Zombies zombie : ZombieFactory.getAvailableZombies()) {
             GameObject asPlant = PlantFactory.spawnPlant(zombie.getSymbol(), world, P);
             assertNull(asPlant, zombie.getSymbol() + " is a zombie symbol");
         }

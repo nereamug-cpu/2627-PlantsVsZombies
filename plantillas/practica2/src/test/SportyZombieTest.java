@@ -3,7 +3,7 @@ package test;
 import org.junit.jupiter.api.Test;
 import pvz.logic.GameWorld;
 import pvz.logic.gameobjects.SportyZombie;
-import pvz.logic.gameobjects.Zombie;
+import pvz.logic.gameobjects.Zombies;
 import utils.Position;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class SportyZombieTest extends AbstractZombieTest {
 
     @Override
-    protected Zombie create(Position position, GameWorld world) {
+    protected Zombies create(Position position, GameWorld world) {
         return new SportyZombie(position, world);
     }
 

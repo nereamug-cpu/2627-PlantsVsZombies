@@ -5,7 +5,7 @@ import pvz.control.Level;
 import pvz.logic.Game;
 import pvz.logic.GameWorld;
 import pvz.logic.gameobjects.CommonZombie;
-import pvz.logic.gameobjects.Zombie;
+import pvz.logic.gameobjects.Zombies;
 import utils.Position;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CommonZombieTest extends AbstractZombieTest {
 
     @Override
-    protected Zombie create(Position position, GameWorld world) {
+    protected Zombies create(Position position, GameWorld world) {
         return new CommonZombie(position, world);
     }
 

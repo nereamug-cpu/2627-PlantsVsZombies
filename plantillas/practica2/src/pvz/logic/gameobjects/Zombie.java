@@ -1,61 +1,35 @@
 package pvz.logic.gameobjects;
 
-import pvz.logic.GameWorld;
-import pvz.logic.gameobjects.factories.ZombieFactory;
-import pvz.view.Messages;
 import utils.Position;
+import pvz.logic.GameWorld;
+import pvz.view.Messages;
 
-public abstract class Zombie extends GameObject{
-	private int damage;
-	private int endurance;
-	private int speed;
+public class Zombie extends Zombies {
+	public static final int DAMAGE = 1;
+	public static final int ENDURANCE = 5;
+	public static final int SPEED = 2;
 	
-	Zombie(GameWorld game, Position p, int damage, int endurance, int speed) {
-		super(game, p);
-		this.damage = damage;
-		this.endurance = endurance;
-		this.speed = speed;
-	}
+	private int cycles;
 	
-	public abstract String getSymbol();
-	public abstract String getName();
-	
-	@Override
-	public String getIcon() {
-		return String.format(Messages.GAME_OBJECT_ICON, getSymbol(), endurance);
+	public Zombie(Position p, GameWorld gameWorld) {
+		super(gameWorld, p, DAMAGE, ENDURANCE, SPEED);
+		cycles = 0;
 	}
 	
 	@Override
-	public String getDescription() {
-		return String.format(Messages.ZOMBIE_DESCRIPTION, getSymbol(), speed, damage, endurance);
+	public String getSymbol() {
+		return Messages.ZOMBIE_SYMBOL;
 	}
 	
 	@Override
-	public boolean isAlive() {
-		return endurance > 0;
+	public String getName() {
+		return Messages.ZOMBIE_NAME;
 	}
 	
-	@Override
-	public void onEnter() {}
+	// falta el update() que como no hemos llegado a Actions es un lío
 	
 	@Override
-	public void onExit() {}
-	
-	@Override
-	public boolean receiveZombieAttack(int damage) {
-		return false;
+	public Zombies copy(Position p, GameWorld gameWorld) {
+		return new Zombie(p, gameWorld);
 	}
-	
-	@Override
-	public boolean receivePlantAttack(int damage) {
-		endurance -= damage;
-		return true;
-	}
-	
-	@Override
-	public boolean canBeSpawnedAt(Position p) {
-		return ZombieFactory.spawnZombie(getName(), this.game, p) != null;
-	}
-	
-	public abstract Zombie copy(Position p,GameWorld gameWorld);
 }

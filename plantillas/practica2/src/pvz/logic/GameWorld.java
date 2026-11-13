@@ -1,7 +1,9 @@
 package pvz.logic;
 //GameWorld ahora tiene solo los métodos relacionados con OBJETOS. plntas y zombies
 
-import pvz.logic.gameobjects.*;
+import pvz.logic.gameobjects.GameItem;
+import pvz.logic.gameobjects.GameObject;
+
 import utils.Position;
 
 public interface GameWorld {
