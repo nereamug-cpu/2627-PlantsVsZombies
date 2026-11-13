@@ -2,9 +2,7 @@ package pvz.control.command;
 import pvz.logic.GameModel;
 import pvz.logic.gameobjects.factories.ZombieFactory;
 import pvz.logic.gameobjects.Zombies;
-
 import java.util.List;
-import java.util.ArrayList;
 import pvz.view.*;
 
 public class ListZombiesCommand extends Command{
@@ -27,18 +25,19 @@ public class ListZombiesCommand extends Command{
 	}
 	
 	@Override
-	public void execute(GameModel gm, GameView gv) {
-		//muestra descripción de las plantas pero no avanza ciclo
-		List<String> zombiesDescriptions = new ArrayList<>();
+	public void execute(GameModel gm, GameView gv) {//muestra descripción de las plantas pero no avanza ciclo
 		List<Zombies> zombies = ZombieFactory.getAvailableZombies();
 		
-		// Obtenemos las descripciones de las plantas registradas en la factoría
+		String zombiesDescriptions = "";
+		
 		for (int i = 0; i < zombies.size(); i++) {
-			String description = zombies.get(i).getDescription();
-			zombiesDescriptions.add(description);
+			if (!zombiesDescriptions.isEmpty()) {
+				zombiesDescriptions += Messages.LINE_SEPARATOR;
+			}
+			
+			zombiesDescriptions += zombies.get(i).getDescription();
 		}
 		
-		// Muestra la lista formateada
-		gv.showMessage(String.join(Messages.LINE_SEPARATOR, zombiesDescriptions));
+		gv.showMessage(zombiesDescriptions);
 	}
 }

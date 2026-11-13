@@ -26,7 +26,7 @@ public class PlantFactory {
 		
 		while (!found && pos < AVAILABLE_PLANTS.size()) {
 			p = AVAILABLE_PLANTS.get(pos);
-			if (p.getName().equalsIgnoreCase(plantName)) {
+			if (p.getName().equalsIgnoreCase(plantName) || p.getSymbol().equalsIgnoreCase(plantName)) {
 				found = true;
 			}
 			pos++;
@@ -48,21 +48,21 @@ public class PlantFactory {
 	}
 	
 	
-	/*
-	public static boolean isValidPlant(String plantName) {
+	
+	public static boolean validPlantName(String plantName) {
 		if (plantName == null) return false;
 		Plant plant = null;
 		int pos = 0;
 		boolean found = false;
 		while (!found && pos < AVAILABLE_PLANTS.size()) {
 			plant = AVAILABLE_PLANTS.get(pos);
-			if (plant.getSymbol().equalsIgnoreCase(plantName) || plant.getnameAndShortcut().toLowerCase().contains(plantName.toLowerCase())) {
-				return true;
+			if (plant.getName().equalsIgnoreCase(plantName) || plant.getSymbol().equalsIgnoreCase(plantName)) {
+				found = true;;
 			}
 			pos++;
 		}
-		return false;
+		return found;
 	}
-	 */
+	
 
 }

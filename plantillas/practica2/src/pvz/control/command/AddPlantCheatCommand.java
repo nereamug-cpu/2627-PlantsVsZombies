@@ -62,7 +62,7 @@ public class AddPlantCheatCommand extends Command{
 	public void execute(GameModel gm, GameView gv) {
 		Position pos = new Position(row, col);
 		//si los parámetros están mal escritos
-		if (!gm.checkGameObject(this.plantName)) gv.showError(Messages.INVALID_GAME_OBJECT);
+		if (!gm.validPlantName(this.plantName)) gv.showError(Messages.INVALID_GAME_OBJECT);
 		//casilla mal
 		else if (!gm.isInsideBoard(pos) || !gm.isEmpty(pos)) gv.showError(Messages.INVALID_POSITION);
 		else {

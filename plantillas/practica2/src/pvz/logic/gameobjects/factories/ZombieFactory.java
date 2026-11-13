@@ -23,7 +23,7 @@ public class ZombieFactory {
 		while (!found && pos < AVAILABLE_ZOMBIES.size()) {
 			zombie = AVAILABLE_ZOMBIES.get(pos);
 			
-			if (zombie.getName().equalsIgnoreCase(zombieName)) {
+			if (zombie.getName().equalsIgnoreCase(zombieName) || zombie.getSymbol().equalsIgnoreCase(zombieName)) {
 				found = true;
 			}
 			pos++;
@@ -43,5 +43,23 @@ public class ZombieFactory {
 		return Collections.unmodifiableList(AVAILABLE_ZOMBIES);
 	}
 	
-	// ...
+	public static boolean validZombieName(String zombieName) {
+		if (zombieName == null) {
+			return false;
+		}
+		
+		Zombies zombie = null;
+		int pos = 0;
+		boolean found = false;
+		
+		while (!found && pos < AVAILABLE_ZOMBIES.size()) {
+			zombie = AVAILABLE_ZOMBIES.get(pos);
+			if (zombie.getName().equalsIgnoreCase(zombieName) || zombie.getSymbol().equalsIgnoreCase(zombieName)) {
+				found = true;
+			}
+			pos++;
+		}
+		
+		return found;
+	}
 }
